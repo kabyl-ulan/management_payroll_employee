@@ -11,18 +11,44 @@ import {
 } from "@chakra-ui/react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { PUBLIC_API } from "../api";
 
 const LoginForm = () => {
   const [passEye, setPassEye] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const handleClick = () => {
     setPassEye(!passEye);
   };
 
+  const fetchLogin = async (auth) => {
+    try {
+      setLoading(true);
+      const { data } = await PUBLIC_API.post("user/login", {
+        ...auth,
+      });
+      setLoading(false);
+      localStorage.setItem("token", data.token);
+      navigate("/admin");
+    } catch (e) {
+      alert(e.message);
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/admin");
+    fetchLogin(user);
   };
 
   return (
@@ -44,6 +70,8 @@ const LoginForm = () => {
                   id="email"
                   required
                   type="email"
+                  name="email"
+                  defaultValue={user.email}
                   placeholder="Введите почту*"
                   border="1px"
                   borderColor="#AAAAAA"
@@ -53,6 +81,7 @@ const LoginForm = () => {
                   fontSize="14px"
                   py={{ base: "10px", sm: "25px" }}
                   color="#174079"
+                  onChange={handleChange}
                 />
               </Box>
               <Box mb="15px">
@@ -61,6 +90,8 @@ const LoginForm = () => {
                     required
                     id="password"
                     type={passEye ? "text" : "password"}
+                    name="password"
+                    defaultValue={user.password}
                     placeholder="Введите пароль*"
                     border="1px"
                     borderColor="#AAAAAA"
@@ -70,6 +101,7 @@ const LoginForm = () => {
                     fontSize="14px"
                     py={{ base: "10px", sm: "25px" }}
                     color="#174079"
+                    onChange={handleChange}
                   />
                   <InputRightElement width="3rem" h="100%">
                     <Box
@@ -87,6 +119,7 @@ const LoginForm = () => {
                 </InputGroup>
               </Box>
               <Button
+                isLoading={loading}
                 w="100%"
                 fontSize="18px"
                 fontWeight="500"

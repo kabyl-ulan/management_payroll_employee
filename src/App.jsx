@@ -1,13 +1,28 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { HeaderAdmin } from "./components";
 
-import { AdminPage, HomePage, NotFound } from "./page";
+import {
+  AdminPage,
+  ChangeEmployeePage,
+  HomePage,
+  NotFound,
+  SalaryPage,
+} from "./page";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/admin" element={<AdminPage header={<HeaderAdmin />} />} />
+      <Route
+        path="/changeEmployee/:idEmployee"
+        element={<ChangeEmployeePage header={<HeaderAdmin />} />}
+      />
+      <Route
+        path="/salary/:idEmployee"
+        element={<SalaryPage header={<HeaderAdmin />} />}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

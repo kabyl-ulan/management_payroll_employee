@@ -1,10 +1,11 @@
 import React from "react";
-import { SalaryEmployee } from "../components";
+import { EmployeeList } from "../components";
 
-const AdminPage = () => {
+const AdminPage = ({ header }) => {
   return (
     <>
-      <SalaryEmployee />
+      {header}
+      <EmployeeList />
     </>
   );
 };
