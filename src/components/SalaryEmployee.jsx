@@ -23,7 +23,10 @@ const SalaryEmployee = () => {
   const [loading, setLoading] = React.useState(false);
   const [emloyee, setEmployee] = React.useState({});
 
+  console.log(value);
+
   const { main } = useSelector((state) => state.main);
+  const { employeeOne } = useSelector((state) => state.employee);
 
   const { idEmployee } = useParams();
   const dispatch = useAppDispatch();
@@ -54,6 +57,9 @@ const SalaryEmployee = () => {
   return (
     <section>
       <Container maxW="1220px">
+        <Text textAlign="left">
+          {employeeOne.name} {employeeOne.surname}
+        </Text>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl color="black">
             <Input
@@ -99,6 +105,7 @@ const SalaryEmployee = () => {
               mt="20px"
             >
               <Stack direction="row">
+                <Radio value="4">Праздничные дни</Radio>
                 <Radio value="1">Больничный</Radio>
                 <Radio mx="40px" value="2">
                   Отпуск
@@ -106,6 +113,15 @@ const SalaryEmployee = () => {
                 <Radio value="3">Нет</Radio>
               </Stack>
             </RadioGroup>
+            <Box display={"flex"} justifyContent="center" py="20px">
+              <Input
+                {...register("holidayCount")}
+                type={value === "4" ? "number" : "hidden"}
+                w="250px"
+                placeholder="Празничные дни"
+                defaultValue="0"
+              />
+            </Box>
             <Box
               display={"flex"}
               maxW="560px"
@@ -149,14 +165,15 @@ const SalaryEmployee = () => {
               <Text fontSize="20px">Отчисления работодателя:</Text>
               <Box mt="10px">
                 <Text>
-                  Пенсионный взнос -({+main.tax*100})%: {emloyee.pensionContribution}
+                  Пенсионный взнос -({+main.tax * 100})%:{" "}
+                  {emloyee.pensionContribution}
                   сом
                 </Text>
               </Box>
               <Box mt="10px">
                 <Text>
                   Государственный накопительный пенсионный фонд -(
-                  {+main.pensionFund*100})%: {emloyee.pensionFund}сом
+                  {+main.pensionFund * 100})%: {emloyee.pensionFund}сом
                 </Text>
               </Box>
               <Box mt="10px">
@@ -168,7 +185,8 @@ const SalaryEmployee = () => {
               <Box my="20px"></Box>
               <Box mt="10px">
                 <Text>
-                  Подоходный налог -({+main.socialBenefits*100})%: {emloyee.tax}
+                  Подоходный налог -({+main.socialBenefits * 100})%:{" "}
+                  {emloyee.tax}
                 </Text>
               </Box>
             </Box>

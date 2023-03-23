@@ -3,3 +3,4 @@ export { default as NotFound } from "./NotFound";
 export { default as AdminPage } from "./AdminPage";
 export { default as ChangeEmployeePage } from "./ChangeEmployeePage";
 export { default as SalaryPage } from "./SalaryPage";
+export { default as HistorySalaryPage } from "./HistorySalary";

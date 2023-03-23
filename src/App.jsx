@@ -5,6 +5,7 @@ import { HeaderAdmin } from "./components";
 import {
   AdminPage,
   ChangeEmployeePage,
+  HistorySalaryPage,
   HomePage,
   NotFound,
   SalaryPage,
@@ -22,6 +23,10 @@ const App = () => {
       <Route
         path="/salary/:idEmployee"
         element={<SalaryPage header={<HeaderAdmin />} />}
+      />
+      <Route
+        path="/historySalary/:idEmployee"
+        element={<HistorySalaryPage header={<HeaderAdmin />} />}
       />
       <Route path="*" element={<NotFound />} />
     </Routes>
