@@ -80,7 +80,15 @@ const EmployeeList = () => {
                   <Td>{el.position}</Td>
                   <Td>{el.email}</Td>
                   <Td>
-                    <Box w="20px" h="20px" fontSize="20px" cursor="pointer">
+                    <Box
+                      w="20px"
+                      h="20px"
+                      fontSize="20px"
+                      cursor="pointer"
+                      onClick={() => {
+                        navigate(`/historySalary/${el.id}`);
+                      }}
+                    >
                       <FcMoneyTransfer />
                     </Box>
                   </Td>

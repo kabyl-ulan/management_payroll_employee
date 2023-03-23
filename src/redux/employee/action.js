@@ -26,7 +26,8 @@ export const deleteEmployee = (id) => async (dispatch) => {
     console.log(data);
     // dispatch(subEmployeeSuccess(data));
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
+    alert(e.message)
   }
 };
 
