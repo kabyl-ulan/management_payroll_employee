@@ -1,4 +1,4 @@
-This is a [React.js](https://react.dev/), [Chakra UI](https://github.com/chakra-ui/chakra-ui) and [Javascript](https://github.com/topics/javascript) starter.
+This is a [React.js](https://react.dev/), [Redux.js](https://github.com/reduxjs/redux), [Chakra UI](https://github.com/chakra-ui/chakra-ui) and [Javascript](https://github.com/topics/javascript) starter.
 
 ## Getting Started
 
